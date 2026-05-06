@@ -15,7 +15,7 @@ export const EMAIL_DISPLAY = 'Info@maltonwealthrecovery.com'
 export const EMAIL_HREF = `mailto:${EMAIL_DISPLAY}`
 
 /** Placeholder registered / correspondence address (UK) — replace with real details */
-export const CONTACT_ADDRESS_LINES = ['xxx Address line', 'xxx Town, xxx Postcode', 'United Kingdom']
+export const CONTACT_ADDRESS_LINES = ["535 King's Road", 'London SW10 0SZ']
 
 export const HERO_BENEFIT_TICK_PLATE_FILL = 'hero-benefit-tick-plate-sheen'
 
@@ -27,3 +27,10 @@ export const SCAM_OPTIONS = [
   'Trading',
   'Other',
 ]
+
+/** Relative URL beside built index.html; override with VITE_CONTACT_PHP_URL when needed. */
+export const CONTACT_FORM_ENDPOINT =
+  typeof import.meta.env.VITE_CONTACT_PHP_URL === 'string' &&
+  import.meta.env.VITE_CONTACT_PHP_URL.trim() !== ''
+    ? import.meta.env.VITE_CONTACT_PHP_URL.trim()
+    : '/contact.php'

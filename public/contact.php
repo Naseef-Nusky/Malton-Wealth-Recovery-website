@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use PHPMailer\PHPMailer\Exception as PhpMailerException;
+use PHPMailer\PHPMailer\PHPMailer;
+
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -54,7 +57,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$to = 'naseefnusky09@gmail.com';
 $subject = 'New enquiry from website contact form';
 
 $plainBody = implode("\n", [
@@ -71,21 +73,86 @@ $plainBody = implode("\n", [
 
 $safeReplyTo = preg_replace('/[\r\n]+/', '', $email);
 
+$baseDir = __DIR__;
+$mailAutoload = $baseDir . '/mail-autoload.php';
+$smtpSecret = $baseDir . '/smtp.secret.php';
+
+if (is_file($mailAutoload) && is_file($smtpSecret)) {
+    /** @var array<string, mixed> $cfg */
+    $cfg = require $smtpSecret;
+
+    $requiredKeys = ['smtp_host', 'smtp_port', 'smtp_secure', 'smtp_username', 'smtp_password', 'mail_from_email', 'mail_from_name', 'mail_to_email'];
+    foreach ($requiredKeys as $key) {
+        if (!isset($cfg[$key]) || (is_string($cfg[$key]) && trim($cfg[$key]) === '')) {
+            http_response_code(500);
+            echo json_encode([
+                'ok' => false,
+                'message' => 'SMTP configuration is incomplete on the server.',
+            ]);
+            exit;
+        }
+    }
+
+    require_once $mailAutoload;
+
+    $mail = new PHPMailer(true);
+
+    try {
+        $mail->isSMTP();
+        $mail->Host = (string) $cfg['smtp_host'];
+        $mail->SMTPAuth = true;
+        $mail->Username = (string) $cfg['smtp_username'];
+        $mail->Password = (string) $cfg['smtp_password'];
+        $mail->Port = (int) $cfg['smtp_port'];
+
+        $secure = strtolower((string) $cfg['smtp_secure']);
+        if ($secure === 'ssl') {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        } else {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        }
+
+        $mail->CharSet = PHPMailer::CHARSET_UTF8;
+        $mail->setFrom((string) $cfg['mail_from_email'], (string) $cfg['mail_from_name']);
+        $mail->addAddress((string) $cfg['mail_to_email']);
+        $mail->addReplyTo($safeReplyTo, $fullName);
+
+        $mail->Subject = $subject;
+        $mail->Body = $plainBody;
+
+        $mail->send();
+
+        echo json_encode([
+            'ok' => true,
+            'message' => 'Enquiry sent successfully.',
+        ]);
+        exit;
+    } catch (PhpMailerException $e) {
+        http_response_code(500);
+        echo json_encode([
+            'ok' => false,
+            'message' => 'Unable to send email via SMTP. Check server SMTP settings.',
+        ]);
+        exit;
+    }
+}
+
+/** Fallback only if mail-autoload.php + smtp.secret.php are missing (not recommended). */
 $headers = [
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
-    'From: Malton Wealth Recovery <Info@maltonwealthrecovery.com>',
+    'From: Malton Wealth Recovery <info@maltonwealthrecovery.com>',
     'Reply-To: ' . $safeReplyTo,
     'X-Mailer: PHP/' . phpversion(),
 ];
 
-$sent = mail($to, $subject, $plainBody, implode("\r\n", $headers));
+$sentLegacy = mail('naseefnusky09@gmail.com', $subject, $plainBody, implode("\r\n", $headers));
 
-if (!$sent) {
+if (!$sentLegacy) {
     http_response_code(500);
     echo json_encode([
         'ok' => false,
-        'message' => 'Mail server is not configured correctly on this host. Please contact support or use SMTP.',
+        'message' => 'Email is not configured. Add mail-autoload.php, PHPMailer PHP files, and smtp.secret.php next to contact.php.',
     ]);
     exit;
 }

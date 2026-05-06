@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import {
   contactPageImg,
+  CONTACT_ADDRESS_LINES,
   EMAIL_DISPLAY,
   EMAIL_HREF,
   PHONE_DISPLAY,
   PHONE_HREF,
 } from '../constants.js'
 import { ContactForm } from '../components/ContactForm.jsx'
-import { MailIcon, PhoneCallIcon } from '../components/Icons.jsx'
+import { MailIcon, MapPinIcon, PhoneCallIcon } from '../components/Icons.jsx'
 import { SectionRule } from '../components/SectionRule.jsx'
 
 /* Contact Us page + form headings — copy supplied by client */
@@ -57,7 +58,18 @@ export default function Contact() {
           <div className="mt-14 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-6 sm:mt-16 sm:px-8">
             <h2 className="heading-card mb-5 text-[var(--brand)]">Contact details</h2>
             <div className="space-y-4 text-base leading-relaxed text-slate-700">
-              {/* Address block hidden for now per client request.
+              <div>
+                <a href={PHONE_HREF} className="inline-flex gap-3 font-semibold text-[var(--brand-cta)] transition hover:text-[var(--brand-cta-hover)]">
+                  <PhoneCallIcon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                  {PHONE_DISPLAY}
+                </a>
+              </div>
+              <div>
+                <a href={EMAIL_HREF} className="inline-flex gap-3 font-medium text-[var(--brand-cta)] transition hover:text-[var(--brand-cta-hover)]">
+                  <MailIcon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                  {EMAIL_DISPLAY}
+                </a>
+              </div>
               <div className="flex gap-3">
                 <MapPinIcon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-cta)]" aria-hidden="true" />
                 <address className="space-y-0.5 not-italic">
@@ -65,19 +77,6 @@ export default function Contact() {
                     <div key={line}>{line}</div>
                   ))}
                 </address>
-              </div>
-              */}
-              <div>
-                <a href={EMAIL_HREF} className="inline-flex gap-3 font-medium text-[var(--brand-cta)] transition hover:text-[var(--brand-cta-hover)]">
-                  <MailIcon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-                  {EMAIL_DISPLAY}
-                </a>
-              </div>
-              <div>
-                <a href={PHONE_HREF} className="inline-flex gap-3 font-semibold text-[var(--brand-cta)] transition hover:text-[var(--brand-cta-hover)]">
-                  <PhoneCallIcon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-                  {PHONE_DISPLAY}
-                </a>
               </div>
             </div>
           </div>

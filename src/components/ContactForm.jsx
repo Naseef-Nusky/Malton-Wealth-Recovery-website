@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SCAM_OPTIONS } from '../constants.js'
+import { CONTACT_FORM_ENDPOINT, SCAM_OPTIONS } from '../constants.js'
 
 export function ContactForm({
   onSubmitted,
@@ -29,7 +29,7 @@ export function ContactForm({
     }
 
     try {
-      const response = await fetch('/contact.php', {
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ export function ContactForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-brand w-full rounded-lg px-10 py-3.5 text-base font-semibold text-white shadow-md transition sm:w-auto sm:min-w-[200px]"
+          className="btn-brand w-full rounded-lg px-10 py-3.5 text-base font-semibold text-white shadow-md transition sm:w-auto sm:min-w-[200px] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isSubmitting ? 'Sending...' : submitLabel}
         </button>
