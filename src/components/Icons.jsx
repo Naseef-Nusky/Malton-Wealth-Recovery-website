@@ -174,6 +174,16 @@ export function ServiceIconFundRecovery({ className }) {
   )
 }
 
+export function ServiceIconOther({ className }) {
+  return (
+    <svg className={className} aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.65" d="m12 4 8 4-8 4-8-4 8-4Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.65" d="m4 12 8 4 8-4" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.65" d="m4 16 8 4 8-4" />
+    </svg>
+  )
+}
+
 const SERVICE_ICON_BY_ID = {
   investment: ServiceIconInvestment,
   crypto: ServiceIconCrypto,
@@ -181,6 +191,7 @@ const SERVICE_ICON_BY_ID = {
   pushPayment: ServiceIconPushPayment,
   romance: ServiceIconRomance,
   fundRecovery: ServiceIconFundRecovery,
+  other: ServiceIconOther,
 }
 
 export function ServiceCardIconDecor({ iconId }) {

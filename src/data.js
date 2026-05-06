@@ -31,4 +31,9 @@ export const SERVICES = [
     title: 'Fund Recovery Guidance',
     body: 'We assist individuals in understanding the process of attempting to recover money lost to fraud, working alongside experienced legal and financial professionals to ensure a clear and considered approach.',
   },
+  {
+    iconId: 'other',
+    title: "Something We Haven't Mentioned?",
+    body: 'Financial fraud can take many forms, and not every situation fits into a defined category. If your circumstances are not listed above, it does not mean that there are no options available. If you have lost £5,000 or more to a potential scam, we can help you understand your position and take the first steps to help you recover your funds.',
+  },
 ]

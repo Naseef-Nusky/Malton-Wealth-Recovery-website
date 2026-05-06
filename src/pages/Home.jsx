@@ -19,6 +19,22 @@ const TYPES_OF_FRAUD = [
   'Authorised push payment fraud UK',
   'Impersonation scams and bank fraud',
   'Romance scams and social engineering fraud',
+  'Other types of fraud not listed above',
+]
+
+const SIMPLE_STEPS = [
+  {
+    title: 'Initial Consultation',
+    body: 'We begin with a free, confidential consultation to understand your situation and analyse the key details of your case.',
+  },
+  {
+    title: 'Case Assessment',
+    body: 'Your case is carefully assessed alongside experienced legal and financial professionals to determine the most appropriate approach.',
+  },
+  {
+    title: 'Recovery Process',
+    body: 'We guide you through the recovery process, keeping you informed at every stage as your case progresses.',
+  },
 ]
 
 export default function Home() {
@@ -53,13 +69,7 @@ export default function Home() {
             <p className="hero-sublead mb-6 font-medium">
               Take the first step towards understanding your options with expert fraud recovery guidance in the UK.
             </p>
-            <p className="hero-intro mb-8 px-2 sm:px-0">
-              We assist individuals across the UK who have lost significant sums to financial fraud, including
-              investment scams, cryptocurrency scams, trading fraud, and online deception. If you are searching for how
-              to recover money lost to a scam, our team provides clear, structured guidance to help you understand what
-              may be possible.
-            </p>
-            <ul className="hero-tick-list mb-10 flex w-full max-w-xl flex-col gap-3.5 text-left text-base sm:gap-4 sm:text-lg">
+            <ul className="hero-tick-list mb-8 flex w-full max-w-xl flex-col gap-3.5 text-left text-base sm:gap-4 sm:text-lg">
               {HERO_TICKS.map((line) => (
                 <li key={line} className="flex items-start gap-3">
                   <HeroBenefitTick />
@@ -67,6 +77,12 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            <p className="hero-intro mb-10 px-2 sm:px-0">
+              We assist individuals across the UK who have lost significant sums to financial fraud, including
+              investment scams, cryptocurrency scams, trading fraud, and online deception. If you are searching for how
+              to recover money lost to a scam, our team provides clear, structured guidance to help you understand what
+              may be possible.
+            </p>
             <div className="flex w-full max-w-2xl flex-col items-stretch gap-3.5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
               <Link
                 to="/contact"
@@ -88,7 +104,7 @@ export default function Home() {
 
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-brand heading-section mb-6 text-center">Clear, Professional Guidance</h2>
+          <h2 className="text-brand heading-section mb-6 text-center">Professional Guidance</h2>
           <p className="mb-4 text-center text-lg leading-relaxed text-slate-600 text-pretty">
             Losing money to a scam can be overwhelming. Whether you have been affected by an investment scam,
             cryptocurrency fraud, or authorised push payment fraud, it is important to understand that there may still
@@ -120,6 +136,25 @@ export default function Home() {
           <p className="text-center text-lg leading-relaxed text-slate-600 text-pretty">
             If you are searching for help with recovering money from a scam, our team is here to guide you.
           </p>
+        </div>
+      </section>
+
+      <SectionRule />
+
+      <section className="px-4 pb-14 sm:px-6 sm:pb-16 lg:pb-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-brand heading-section mb-8 text-center">3 Simple Steps</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {SIMPLE_STEPS.map((step, index) => (
+              <article key={step.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <span className="mb-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand)] text-sm font-semibold text-white shadow-sm">
+                  {index + 1}
+                </span>
+                <h3 className="heading-step mb-2.5 text-[var(--brand)]">{step.title}</h3>
+                <p className="text-base leading-relaxed text-slate-600">{step.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import {
   contactPageImg,
-  CONTACT_ADDRESS_LINES,
   EMAIL_DISPLAY,
   EMAIL_HREF,
   PHONE_DISPLAY,
   PHONE_HREF,
 } from '../constants.js'
 import { ContactForm } from '../components/ContactForm.jsx'
-import { MailIcon, MapPinIcon, PhoneCallIcon } from '../components/Icons.jsx'
+import { MailIcon, PhoneCallIcon } from '../components/Icons.jsx'
 import { SectionRule } from '../components/SectionRule.jsx'
 
 /* Contact Us page + form headings — copy supplied by client */
@@ -21,7 +20,7 @@ export default function Contact() {
   return (
     <div>
       <section
-        className="hero-section relative flex min-h-[14rem] flex-col justify-end px-4 py-12 text-white sm:min-h-[16rem] sm:px-6"
+        className="hero-section relative flex min-h-[14rem] flex-col justify-center px-4 py-12 text-white sm:min-h-[16rem] sm:px-6"
         style={{ '--hero-bg-image': `url(${contactPageImg})` }}
       >
         <div className="hero-section-content relative z-[1] mx-auto w-full max-w-6xl px-2 text-center">
@@ -46,7 +45,7 @@ export default function Contact() {
           <SectionRule className="py-8" />
 
           <h2 id={CONTACT_HEADING_ID} className="heading-form mb-8 text-center">
-            Start Your Free, Confidential Consultation
+            Start Your <span className="text-[var(--brand-accent-green)]">Free</span>, Confidential Consultation
           </h2>
           <ContactForm
             onSubmitted={() => navigate('/thank-you')}
@@ -58,6 +57,7 @@ export default function Contact() {
           <div className="mt-14 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-6 sm:mt-16 sm:px-8">
             <h2 className="heading-card mb-5 text-[var(--brand)]">Contact details</h2>
             <div className="space-y-4 text-base leading-relaxed text-slate-700">
+              {/* Address block hidden for now per client request.
               <div className="flex gap-3">
                 <MapPinIcon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-cta)]" aria-hidden="true" />
                 <address className="space-y-0.5 not-italic">
@@ -66,6 +66,7 @@ export default function Contact() {
                   ))}
                 </address>
               </div>
+              */}
               <div>
                 <a href={EMAIL_HREF} className="inline-flex gap-3 font-medium text-[var(--brand-cta)] transition hover:text-[var(--brand-cta-hover)]">
                   <MailIcon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />

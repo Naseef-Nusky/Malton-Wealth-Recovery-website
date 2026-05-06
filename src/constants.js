@@ -8,11 +8,10 @@ export const aboutPageImg = '/aboutus.png'
 export const contactPageImg = '/contactus.jpeg'
 
 /** Temporary UK mobile; client plans to swap for a company number later */
-export const PHONE_DISPLAY = '07787 071561'
+export const PHONE_DISPLAY = '+44 7787 071561'
 export const PHONE_HREF = 'tel:+447787071561'
 
-/** Placeholder — replace with live inbox when ready */
-export const EMAIL_DISPLAY = 'XXX@maltonwealthrecovery.com'
+export const EMAIL_DISPLAY = 'Info@maltonwealthrecovery.com'
 export const EMAIL_HREF = `mailto:${EMAIL_DISPLAY}`
 
 /** Placeholder registered / correspondence address (UK) — replace with real details */

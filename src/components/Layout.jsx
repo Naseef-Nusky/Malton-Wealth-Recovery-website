@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import {
-  CONTACT_ADDRESS_LINES,
   EMAIL_DISPLAY,
   EMAIL_HREF,
   logoImg,
   PHONE_DISPLAY,
   PHONE_HREF,
 } from '../constants.js'
-import { CloseMenuIcon, MailIcon, MapPinIcon, MenuIcon, PhoneCallIcon } from './Icons.jsx'
+import { CloseMenuIcon, MailIcon, MenuIcon, PhoneCallIcon } from './Icons.jsx'
 
 const navLinkClass = 'rounded-md px-2 py-1 text-slate-700 transition hover:text-[var(--brand)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-cta)]'
 
@@ -135,14 +134,6 @@ export function Layout() {
           <div className="max-w-xs text-center md:text-left">
             <img src={logoImg} alt="" className="mx-auto h-[4rem] w-auto max-w-[280px] object-contain sm:h-[4.75rem] sm:max-w-[320px] md:mx-0" />
             <div className="mt-6 space-y-3 text-sm leading-relaxed text-slate-600">
-              <div className="flex gap-3 not-italic">
-                <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-cta)]" aria-hidden="true" />
-                <address className="space-y-0.5 text-left not-italic">
-                  {CONTACT_ADDRESS_LINES.map((line) => (
-                    <div key={line}>{line}</div>
-                  ))}
-                </address>
-              </div>
               <a href={EMAIL_HREF} className="footer-site-link flex items-center gap-2">
                 <MailIcon className="h-4 w-4 shrink-0 text-[var(--brand-cta)]" aria-hidden="true" />
                 {EMAIL_DISPLAY}

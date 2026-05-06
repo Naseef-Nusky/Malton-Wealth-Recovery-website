@@ -9,7 +9,7 @@ export default function Services() {
   return (
     <div>
       <section
-        className="hero-section relative flex min-h-[14rem] flex-col justify-end px-4 py-12 text-white sm:min-h-[16rem] sm:px-6"
+        className="hero-section relative flex min-h-[14rem] flex-col justify-center px-4 py-12 text-white sm:min-h-[16rem] sm:px-6"
         style={{ '--hero-bg-image': `url(${servicesPageImg})` }}
       >
         <div className="hero-section-content relative z-[1] mx-auto w-full max-w-6xl px-2 text-center">
@@ -20,12 +20,14 @@ export default function Services() {
       <section className="px-4 py-12 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 sm:grid-cols-2 lg:gap-10">
-            {SERVICES.map((svc) => (
+            {SERVICES.map((svc, index) => (
               <article
                 key={svc.title}
-                className="service-card-top service-card flex h-full flex-col rounded-2xl p-7 sm:p-8"
+                className={`service-card-top service-card flex h-full flex-col rounded-2xl p-7 sm:p-8 ${
+                  SERVICES.length % 2 === 1 && index === SERVICES.length - 1 ? 'sm:col-span-2 sm:mx-auto sm:max-w-[34rem] sm:w-full' : ''
+                }`}
               >
-                <div className="service-card-title-row mb-4 flex items-start gap-3">
+                <div className="service-card-title-row mb-4 flex items-center gap-3">
                   <ServiceCardIconDecor iconId={svc.iconId} />
                   <h2 className="text-brand heading-card min-w-0 flex-1">{svc.title}</h2>
                 </div>

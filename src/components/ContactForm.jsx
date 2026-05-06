@@ -9,10 +9,52 @@ export function ContactForm({
   showHeading = true,
 }) {
   const [scamType, setScamType] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    onSubmitted()
+    if (isSubmitting) return
+
+    setSubmitError('')
+    setIsSubmitting(true)
+
+    const formData = new FormData(e.currentTarget)
+    const payload = {
+      fullName: String(formData.get('fullName') ?? '').trim(),
+      mobile: String(formData.get('mobile') ?? '').trim(),
+      email: String(formData.get('email') ?? '').trim(),
+      amountLost: String(formData.get('amountLost') ?? '').trim(),
+      scamType: String(formData.get('scamType') ?? '').trim(),
+    }
+
+    try {
+      const response = await fetch('/contact.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const contentType = response.headers.get('content-type') || ''
+      const isJson = contentType.includes('application/json')
+      const result = isJson ? await response.json().catch(() => ({})) : {}
+
+      if (!response.ok || !result.ok) {
+        const message = typeof result.message === 'string' && result.message
+          ? result.message
+          : 'Form backend is unavailable. If you are testing locally, run the site on a PHP-enabled server.'
+        setSubmitError(message)
+        return
+      }
+
+      onSubmitted()
+    } catch {
+      setSubmitError('Unable to send your enquiry right now. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const formOuter =
@@ -91,12 +133,18 @@ export function ContactForm({
           </select>
         </label>
       </div>
+      {submitError ? (
+        <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
+          {submitError}
+        </p>
+      ) : null}
       <div className="mt-8 flex justify-center">
         <button
           type="submit"
+          disabled={isSubmitting}
           className="btn-brand w-full rounded-lg px-10 py-3.5 text-base font-semibold text-white shadow-md transition sm:w-auto sm:min-w-[200px]"
         >
-          {submitLabel}
+          {isSubmitting ? 'Sending...' : submitLabel}
         </button>
       </div>
     </form>

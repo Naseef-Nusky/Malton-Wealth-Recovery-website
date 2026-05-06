@@ -16,6 +16,7 @@
   --brand: #0f2744;
   --brand-rgb: 15 39 68;
   --brand-accent: #2a5580;
+  --brand-accent-green: #4ade80;
   --brand-muted: #5c6b7a;
   --brand-cta: #1a4060;
   --brand-cta-hover: #152838;
@@ -118,12 +119,13 @@
 }
 
 .hero-benefit-tick-plate {
+  fill: var(--brand-accent-green);
   opacity: 1;
 }
 
 .hero-benefit-tick-ring {
   fill: none;
-  stroke: rgb(255 255 255 / 0.35);
+  stroke: transparent;
 }
 
 .hero-benefit-tick-mark {
@@ -207,10 +209,10 @@
 }
 
 .hero-cta-secondary {
-  color: #fff;
-  background: rgb(255 255 255 / 0.08);
-  border: 2px solid rgb(255 255 255 / 0.5);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.1) inset;
+  color: var(--brand-accent-green);
+  background: rgb(74 222 128 / 0.08);
+  border: 2px solid rgb(74 222 128 / 0.62);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.08) inset;
   backdrop-filter: blur(8px);
   transition:
     color 0.2s ease,
@@ -221,10 +223,10 @@
 }
 
 .hero-cta-secondary:hover {
-  color: #fff;
-  background: rgb(255 255 255 / 0.16);
-  border-color: rgb(255 255 255 / 0.85);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset;
+  color: #d9fbe7;
+  background: rgb(74 222 128 / 0.16);
+  border-color: rgb(74 222 128 / 0.95);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.14) inset;
 }
 
 .hero-cta-secondary:active {
@@ -232,7 +234,7 @@
 }
 
 .hero-cta-secondary:focus-visible {
-  outline: 2px solid rgb(255 255 255 / 0.9);
+  outline: 2px solid rgb(74 222 128 / 0.95);
   outline-offset: 3px;
 }
 
@@ -562,11 +564,11 @@
 }
 
 .page-benefit-tick-plate {
-  fill: rgb(var(--brand-cta-rgb) / 0.12);
-  stroke: rgb(var(--brand-cta-rgb) / 0.4);
+  fill: var(--brand-accent-green);
+  stroke: rgb(74 222 128 / 0.95);
 }
 
 .page-benefit-tick-mark {
   fill: none;
-  stroke: var(--brand-cta);
+  stroke: #fff;
 }

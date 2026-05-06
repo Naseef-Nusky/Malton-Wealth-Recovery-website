@@ -5,7 +5,7 @@ export default function ThankYou() {
   return (
     <div className="flex flex-1 flex-col">
       <section
-        className="hero-section relative flex min-h-[12rem] flex-col justify-end px-4 py-10 text-white sm:min-h-[13rem] sm:px-6"
+        className="hero-section relative flex min-h-[12rem] flex-col justify-center px-4 py-10 text-white sm:min-h-[13rem] sm:px-6"
         style={{ '--hero-bg-image': `url(${heroBg})` }}
       >
         <div className="hero-section-content relative z-[1] mx-auto w-full max-w-6xl px-2 text-center">
